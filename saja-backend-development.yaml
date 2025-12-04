@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: sajaab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-deployment
+  template:
+    metadata:
+      labels:
+        app: backend-deployment
+    spec:
+      containers:
+        - name: expensy-backend
+          image: saja123/expensy-backend:latest
+          ports:
+            - containerPort: 8706
+          env:
+            - name: REDIS_HOST
+              value: "redis"
+            - name: REDIS_PASSWORD
+              value: "someredispassword"
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "root"
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "example"

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: sajaab
+spec:
+  selector:
+    app: frontend-deployment              # Selects Pods labeled "app=nginx" (our Deployment’s Pods)
+  ports:
+    - protocol: TCP
+      port: 80               # The port that the Service will serve on
+      targetPort: 3000         # The port on the Pod’s container to forward traffic to
+  type: ClusterIP          # Exposes the Service only inside the cluster
